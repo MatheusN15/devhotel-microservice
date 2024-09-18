@@ -47,3 +47,14 @@ jobs:
     - name: Docker Compose Build
       working-directory: ./
       run: docker compose build
+
+    - name: Push to Docker Hub Conatiner Registry
+      run: |
+        docker tag ${{ secrets.DOCKER_USERNAME }}/devhotel-naming-server:0.0.1-SNAPSHOT ${{ secrets.DOCKER_USERNAME }}/devhotel-naming-server:${{ github.run_id }}
+        docker tag ${{ secrets.DOCKER_USERNAME }}/devhotel-api-gateway:0.0.1-SNAPSHOT ${{ secrets.DOCKER_USERNAME }}/devhotel-api-gateway:${{ github.run_id }}
+        docker tag ${{ secrets.DOCKER_USERNAME }}/room-service:latest ${{ secrets.DOCKER_USERNAME }}/room-service:${{ github.run_id }}
+        docker tag ${{ secrets.DOCKER_USERNAME }}/user-service:latest ${{ secrets.DOCKER_USERNAME }}/user-service:${{ github.run_id }}
+        docker push ${{ secrets.DOCKER_USERNAME }}/devhotel-naming-server:${{ github.run_id }}
+        docker push ${{ secrets.DOCKER_USERNAME }}/devhotel-api-gateway:${{ github.run_id }}
+        docker push ${{ secrets.DOCKER_USERNAME }}/room-service:${{ github.run_id }}
+        docker push ${{ secrets.DOCKER_USERNAME }}/user-service:${{ github.run_id }}
