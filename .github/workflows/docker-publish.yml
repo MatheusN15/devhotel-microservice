@@ -29,7 +29,7 @@ jobs:
         cache: maven
 
     - name: Build Eureka Naming Server Container Image
-      working-directory: ./devhotel-naming-server
+      # working-directory: ./devhotel-naming-server
       run: mvn spring-boot:build-image -DskipTests
         
     # - name: Build Application JAR
