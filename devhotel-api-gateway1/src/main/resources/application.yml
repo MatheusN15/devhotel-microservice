@@ -1,0 +1,35 @@
+server:
+  port: 8765
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/  # URL do Eureka Server
+spring:
+  application:
+    name: devhotel-api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: user-service
+          uri: lb://user-service  # lb:// usa o Eureka para fazer o load balancing
+          predicates:
+            - Path=/users/**
+        - id: room-service
+          uri: lb://room-service  # lb:// usa o Eureka para fazer o load balancing
+          predicates:
+            - Path=/rooms/**
+  management:
+    tracing:
+      sampling:
+        probability: 1.0
+#  cloud:
+#    gateway:
+#      discovery:
+#        locator:
+#          enabled: true
+#          lower-case-service-id: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

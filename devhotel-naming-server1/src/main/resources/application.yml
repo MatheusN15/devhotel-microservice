@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: devhotel-naming-server
+server:
+  port: 8761  # Porta onde o Eureka Server ser� exposto
+
+eureka:
+  client:
+    register-with-eureka: false  # O servidor Eureka n�o precisa se registrar nele mesmo
+    fetch-registry: false        # O servidor n�o busca registros de outros servidores
